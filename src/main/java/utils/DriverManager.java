@@ -1,4 +1,4 @@
-package driver;
+package utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,8 +15,10 @@ public class DriverManager {
     public static DriverManager getINSTANCE() { return INSTANCE; }
 
     public DriverManager createChromeDriver() {
-        System.setProperty("webdriver.chrome.driver", PATH_TO_CHROME_DRIVER);
-        localDriver.set(new ChromeDriver());
+        if (localDriver.get() == null) {
+            System.setProperty("webdriver.chrome.driver", PATH_TO_CHROME_DRIVER);
+            localDriver.set(new ChromeDriver());
+        }
         return this;
     }
 

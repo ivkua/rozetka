@@ -1,4 +1,8 @@
-import driver.DriverManager;
+import org.testng.Assert;
+import pageObject.BasePage;
+import pageObject.MainPage;
+import pageObject.SmartphonesListPage;
+import utils.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,26 +12,40 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import pageObject.HomePage;
+import utils.PropertiesLoader;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    private WebDriver driver;
-    private String url = "https://my.rozetka.com.ua/";
+    public WebDriver driver;
+    private String url = PropertiesLoader.getInstance().getresourceByName("url");
+
+    private BasePage basePage;
+    private MainPage mainPage;
 
     @BeforeTest
     public void beforeTest() {
         driver = DriverManager.getINSTANCE().createChromeDriver().getDriver();
-        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
     @BeforeMethod
-    public void beforeMethod() {
+    public void beforeMethod(Method method) {
+          mainPage = new MainPage();
+
         driver.get(url);
+
+        if (method.getDeclaringClass().equals(PhoneCommentsTest.class)) {
+            driver.findElement(By.xpath("//a[@class='logo-link']")).click();
+            basePage = mainPage.goToSmartphonePage();
+            Assert.assertTrue(basePage instanceof SmartphonesListPage);
+
+        }
+
     }
 
     @AfterMethod
