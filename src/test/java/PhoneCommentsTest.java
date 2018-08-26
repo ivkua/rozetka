@@ -14,9 +14,10 @@ public class PhoneCommentsTest extends BaseTest {
     public void method () {
         smartphonesListPage.setModelFilter("Apple");
         smartphonesListPage.setDiagonalFilter("5.1\" - 5.5\"");
-        smartphonesListPage.setPriceFilter("10000", "25000");
+        smartphonesListPage.setPriceFilterMax("25000");
         List<String> applePhoneList = smartphonesListPage.collectSmartphoneLinks();
         Map<String, List<String>> listOfComments = phonePage.getListOfComments(applePhoneList);
+
     }
 
 }

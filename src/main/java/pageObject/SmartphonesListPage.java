@@ -28,26 +28,24 @@ public class SmartphonesListPage extends BasePage {
         }
     }
 
-    public void setPriceFilter(String min, String max) {
+    public void setPriceFilterMax(String max) {
         delay(1500);
-        WebElement minValue = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='price[min]']")));
-        minValue.clear();
-        minValue.sendKeys(min);
         WebElement maxValue = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='price[max]']")));
-        maxValue.clear();
         maxValue.sendKeys(max);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='submitprice']"))).click();
+        delay(2000);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='submitprice']")));
+        element.click();
     }
 
     public void setDiagonalFilter(String diagonalDiapazon) {
-        delay(3000); // TODO сделать JS клик
+        delay(1500); // TODO сделать JS клик
         if (diagonalDiapazon.equalsIgnoreCase("5.1\" - 5.5\"")) {
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[text()='5.1\" - 5.5\"']"))).click();
         }
     }
 
     public List<String> collectSmartphoneLinks() {
-        delay(3000);
+        delay(1500);
         return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='g-i-tile-i-box-desc']/div/a"))).stream().map(w -> w.getAttribute("href")).collect(Collectors.toList()); //TODO почитать о синтаксисе сыллок на метод (вместе с лямбдами)
     }
 }

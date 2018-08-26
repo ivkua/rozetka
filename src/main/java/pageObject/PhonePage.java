@@ -28,7 +28,9 @@ public class PhonePage extends BasePage {
     public List<String> getComments(String href) {
         driver.get(href);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@name='comments']"))).click();
-            return driver.findElements(By.xpath("//div[@class='pp-review-text-i']"))
+        delay(2000);
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='pp-review-text-i']"));
+        return elements
                     .stream()
                     .map(WebElement::getText)
                     .collect(Collectors.toList());
