@@ -1,6 +1,5 @@
 package pageObject;
 
-
 public class BasePage extends PageObject{
 
     public void delay(int timeOut) {
@@ -10,5 +9,4 @@ public class BasePage extends PageObject{
             e.printStackTrace();
         }
     }
-
 }
