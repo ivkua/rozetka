@@ -48,4 +48,5 @@ public class SmartphonesListPage extends BasePage {
         delay(1500);
         return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='g-i-tile-i-box-desc']/div/a"))).stream().map(w -> w.getAttribute("href")).collect(Collectors.toList()); //TODO почитать о синтаксисе сыллок на метод (вместе с лямбдами)
     }
+    
 }
