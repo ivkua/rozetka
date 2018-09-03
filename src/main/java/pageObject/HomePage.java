@@ -11,6 +11,7 @@ public class HomePage extends BasePage {
     public BasePage logOut() {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@name='profile']"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='profile_signout']"))).click();
+        
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@name='auth-btn']/a")));
             return new MainPage();
