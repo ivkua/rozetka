@@ -29,7 +29,6 @@ public class MainPage extends BasePage {
     String s = "//a[@name='profile']";
 
     public BasePage loginIn(String login, String password) {
-        //driver.findElement(By.xpath("//a[@class='logo-link']")).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='logo-link']"))).click();
         mainBtn.click();
         singInBtn.click();
